@@ -10,19 +10,19 @@ services:
     command: [start-kafka.sh] 
     ports: 
       - "9092:9092" 
-  hostname: kafka 
-  environment: 
-    KAFKA_CREATE_TOPICS: "events:1:1" # topic:partition:replicas 
-    KAFKA_ADVERTISED_HOST_NAME: lab6-tannguyen.eastus.cloudapp.azure.com # docker-machine ip 
-    KAFKA_LISTENERS: INSIDE://:29092,OUTSIDE://:9092 
-    KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE 
-    KAFKA_ADVERTISED_LISTENERS: INSIDE://kafka:29092,OUTSIDE://lab6-tannguyen.eastus.cloudapp.azure.com:9092 
-    KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT 
-    KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181 
-  volumes: 
-    - /var/run/docker.sock:/var/run/docker.sock 
-  depends_on:
-    - "zookeeper" 
+    hostname: kafka 
+    environment: 
+      KAFKA_CREATE_TOPICS: "events:1:1" # topic:partition:replicas 
+      KAFKA_ADVERTISED_HOST_NAME: lab6-tannguyen.eastus.cloudapp.azure.com # docker-machine ip 
+      KAFKA_LISTENERS: INSIDE://:29092,OUTSIDE://:9092 
+      KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE 
+      KAFKA_ADVERTISED_LISTENERS: INSIDE://kafka:29092,OUTSIDE://lab6-tannguyen.eastus.cloudapp.azure.com:9092 
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT 
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181 
+    volumes: 
+      - /var/run/docker.sock:/var/run/docker.sock 
+    depends_on:
+      - "zookeeper" 
   db: 
     image: mysql:5.7 
     restart: always 
@@ -43,5 +43,5 @@ services:
     volumes: 
       - my-db:/var/lib/mysql 
   # Names our volume 
-    volumes: 
-    my-db:
+volumes: 
+  my-db:
